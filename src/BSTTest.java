@@ -340,4 +340,21 @@ public class BSTTest
  		
  	}
     
+     @Test
+ 	public void testLcaNegative()
+ 	{
+ 		BST<Integer, Integer> BST = new BST<Integer, Integer>();  
+ 		BST = new BST<Integer, Integer>();
+
+ 		BST.put(7, 7);  
+ 		BST.put(-8, -8);   
+ 		BST.put(-6, -6);
+ 		BST.put(-9, -9);   
+ 		BST.put(10, 10);
+ 		
+ 		assertEquals("Checking the lca of negative nodes", "-8", BST.lca(-6, -9));
+ 		
+ 		assertEquals("Checking the lca of a negative node and a positive node", "7", BST.lca(10, -9));
+ 		
+ 	}
 }
