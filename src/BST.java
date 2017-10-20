@@ -311,7 +311,7 @@ public String prettyPrintKeys() {
         }
     } 
     
-    public String lca(Key x1, Key x2) {
+    public String lca(Key x1, Key x2) {//checks for null values
 
 		if (root == null) {
 			return null;
@@ -323,7 +323,7 @@ public String prettyPrintKeys() {
 			return null;
 		}
 
-		return lca(root, x1, x2);
+		return lca(root, x1, x2);//inputs the root and runs lca
 	}
     
     private String lca(Node node, Key x1, Key x2) {
