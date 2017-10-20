@@ -92,10 +92,9 @@ public class BST<Key extends Comparable<Key>, Value> {
 	 *            the value associated with key
 	 */
 	public void put(Key key, Value val) {
-		/*if (val == null) {
-			delete(key);
-			return ;
-		}*/
+		if (val == null || key == null || contains(key)) {
+			return;}
+		
 		root = put(root, key, val);
 	}
 
@@ -113,21 +112,6 @@ public class BST<Key extends Comparable<Key>, Value> {
 		return x;
 	}
 
-	/**
-	 * Tree height.
-	 *
-	 * Asymptotic worst-case running time using Theta notation: 
-	 * 
-	 * Answer : theta N
-	 * 
-	 * Workings: The function can only visit each node once so the slowest running time can only be the number of nodes it visits
-	 *
-	 * @return the number of links from the root to the deepest leaf.
-	 *
-	 *         Example 1: for an empty tree this should return -1. Example 2:
-	 *         for a tree with only one node it should return 0. Example 3: for
-	 *         the following tree it should return 2. B / \ A C \ D
-	 */
 
 	public int height(){
 		return heightPrivate(root);
@@ -326,4 +310,21 @@ public String prettyPrintKeys() {
         	return max(enteredNode.right); 
         }
     } 
+    
+    public String lca(Key x1, Key x2) {
+
+		if (root == null) {
+			return null;
+		} else if (x1 == null || x2 == null) {
+			return null;
+		} else if (x1 == x2) {
+			return null;
+		} else if (!(contains(x1) && contains(x2))) {
+			return null;
+		}
+
+		return lca(root, x1, x2);
+	}
+
+
 }
