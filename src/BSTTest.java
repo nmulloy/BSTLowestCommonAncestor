@@ -245,6 +245,35 @@ public class BSTTest
                  "(((()1())2(()4(()5())))7())", bst.printKeysInOrder());
      }
      
-     
+     @Test	  	
+	 public void testLca()
+	{
+		BST<Integer, Integer> BST = new BST<Integer, Integer>();  
+		BST = new BST<Integer, Integer>();
+
+		BST.put(7, 7);   //        _7_
+
+		BST.put(8, 8);   //      /     \
+
+		BST.put(3, 3);   //    _3_      8
+
+		BST.put(1, 1);   //  /     \      \
+											
+		BST.put(2, 2);   // 1       6		_12_
+
+		BST.put(6, 6);   //  \     /	   /   \
+
+		BST.put(4, 4);   //   2   4		 11      13
+		
+		BST.put(12, 12);
+		
+		BST.put(11,11);
+		
+		BST.put(13, 13);
+		
+		
+		
+		
+	} 
     
 }
