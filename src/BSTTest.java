@@ -314,7 +314,29 @@ public class BSTTest
  		BST.put(7, 7);   //        _7_
          BST.put(7, 8);   //        _7_
          assertEquals("Check if code properly insert nodes based upon key", 1, BST.size()); // size is one and not 2 despite two puts as keys are the same
-       
+        
+         BST = new BST<Integer, Integer>();
+  		BST.put(7, 7);
+  		BST.put(10, 10);
+  		BST.put(12, 12);
+  		BST.put(6, 6);
+  		BST.put(3, 3);
+  		BST.put(5, 5);
+  	
+  		assertNull("Checking LCA of a node that is not present", BST.lca(4, 6));
+  		assertNull("Checking LCA of two nodes that are not present", BST.lca(4, 2));
+  		
+      	BST = new BST<Integer, Integer>();
+          BST.put(7, 7);   //        _7_
+          BST.put(8, 8);   //      /     \
+          BST.put(3, 3);   //    _3_      8
+          BST.put(1, 1);   //  /     \
+          BST.put(2, 2);   // 1       6
+          BST.put(6, 6);   //  \     /
+          BST.put(4, 4);   //   2   4
+          BST.put(5, 5);   //  /     \
+                           //         5
+          assertEquals("Check if the nodes are inserted in the correct order", "(((()1(()2()))3((()4(()5()))6()))7(()8()))", BST.printKeysInOrder());
  		
  	}
     
