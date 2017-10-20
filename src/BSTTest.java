@@ -271,7 +271,24 @@ public class BSTTest
 		
 		BST.put(13, 13);
 		
+		assertEquals("Checking the LCA of root and left node","7", BST.lca(7,3));
 		
+		assertEquals("Checking the LCA of root and right node","7", BST.lca(7,8));
+		
+		assertEquals("Checking the LCA of 1 and 6","3", BST.lca(1,6)); // checks for standard lca of a subtree 
+
+		assertEquals("Cheking the LCA of 1 and 2","1", BST.lca(1,2)); // if only 1 child return the parent
+		
+		assertEquals("Checking the LCA of 11 and 13", "12", BST.lca(11,13)); // checks rhs lca of a subtree
+		
+		assertEquals("Checking the LCA of 12 and 4", "7", BST.lca(12,4)); // checks rhs and lhs lca both of which are in subtrees
+		
+		
+		BST = new BST<Integer, Integer>();
+		BST.put(7, 7);
+		BST.put(8, 8);
+		
+		assertEquals("Checking the LCA of a tree with one child", "7", BST.lca(8,7));
 		
 		
 	} 
