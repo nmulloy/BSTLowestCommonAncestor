@@ -330,10 +330,10 @@ public String prettyPrintKeys() {
 
 		if (x1.compareTo(node.key) < 0 && x2.compareTo(node.key) < 0) {
 			node = node.left;
-			return lca(node, x1, x2);
+			return lca(node, x1, x2);//recursively calls function
 		} else if (x1.compareTo(node.key) > 0 && x2.compareTo(node.key) > 0) {
 			node = node.right;
-			return lca(node, x1, x2);
+			return lca(node, x1, x2);//recursively calls function
 		}
 
 		return String.valueOf(node.key);
