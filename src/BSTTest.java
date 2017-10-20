@@ -292,5 +292,30 @@ public class BSTTest
 		
 		
 	} 
+     @Test
+ 	public void testPutLCA()
+ 	{
+ 		BST<Integer, Integer> BST = new BST<Integer, Integer>();
+ 		
+ 		BST = new BST<Integer, Integer>();
+ 		
+ 		BST.put(7, 7);
+ 		assertNull("Checking the LCA of a tree with no children", BST.lca(7,7)); // passing in the root twice will return null
+ 		assertNull("Checking the LCA on a tree with one node", BST.lca(7,null)); // passing in null will return null also
+ 		
+ 		BST = new BST<Integer, Integer>();
+ 		
+ 		BST.put(null, 1);
+ 		assertEquals("Testing when null key and valid value inserted", 0, BST.size());
+ 		
+ 		BST.put(1, null);
+ 		assertEquals("Testing when valid key and null value inserted", 0, BST.size());
+
+ 		BST.put(7, 7);   //        _7_
+         BST.put(7, 8);   //        _7_
+         assertEquals("Check if code properly insert nodes based upon key", 1, BST.size()); // size is one and not 2 despite two puts as keys are the same
+       
+ 		
+ 	}
     
 }
