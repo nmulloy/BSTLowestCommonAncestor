@@ -325,6 +325,18 @@ public String prettyPrintKeys() {
 
 		return lca(root, x1, x2);
 	}
+    
+    private String lca(Node node, Key x1, Key x2) {
 
+		if (x1.compareTo(node.key) < 0 && x2.compareTo(node.key) < 0) {
+			node = node.left;
+			return lca(node, x1, x2);
+		} else if (x1.compareTo(node.key) > 0 && x2.compareTo(node.key) > 0) {
+			node = node.right;
+			return lca(node, x1, x2);
+		}
+
+		return String.valueOf(node.key);
+	}
 
 }
