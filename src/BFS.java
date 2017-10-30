@@ -99,26 +99,45 @@ public class BFS {
 		  graph.addEdge(6, 9);
 		  graph.addEdge(7, 6);
 		  
-		  BFS test = new BFS(graph,0);
+		  BFS test = new BFS(graph,7);
 		  
 		  for(int i = 0; i < graph.numberOfVertices(); i++){
 			  if(test.hasPathTo(i)){
-				  System.out.println(0 + " has path  to " + i + " with distance: " + test.distTo(i));
+				  System.out.println(7 + " has a path to " + i + " with distance: " + test.distTo(i));
 				  for(int x : test.pathTo(i)){
-					  if(x == 0){
+					  if(x == 7){
 						  System.out.print(x);
 					  }
 					  else{
-						  System.out.print("->" + x);
+						  System.out.print(x + " -> ");
 					  }
 				  }
 				  System.out.println();
 			  }
 			  else{
-				  System.out.println("0 and " + i +" are not connected");
+				  System.out.println("7 and " + i +" are not connected");
 			  }
 		  }
 		  
+		  test = new BFS(graph,4);
+		  
+		  for(int i = 0; i < graph.numberOfVertices(); i++){
+			  if(test.hasPathTo(i)){
+				  System.out.println(4 + " has a path to " + i + " with distance: " + test.distTo(i));
+				  for(int x : test.pathTo(i)){
+					  if(x == 4){
+						  System.out.print(x);
+					  }
+					  else{
+						  System.out.print(x + " -> ");
+					  }
+				  }
+				  System.out.println();
+			  }
+			  else{
+				  System.out.println("4 and " + i +" are not connected");
+			  }
+		  }
 	}
 	
 }
