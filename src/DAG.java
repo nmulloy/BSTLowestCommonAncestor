@@ -3,30 +3,18 @@ import java.util.ArrayList;
 public class DAG{
 	private static final String NEWLINE = System.getProperty("line.separator");
 	
-
 	
-	private int vertices;//number of vertices
 	private int edges;//number of edges
-	private ArrayList<ArrayList<NodeInfo>> adj;
-	private int [] indegree; //number of vertices pointing to it
-
-	public DAG(int vertices){
-		if (vertices < 0){
-			throw new IllegalArgumentException("No. of vertices must not be negative");
-		}
-		this.vertices = vertices;
+	private static ArrayList<NodeInfo> inGraph;
+	
+	public DAG(){
 		this.edges = 0;
-		indegree = new int[vertices];
-		adj = new ArrayList<ArrayList<NodeInfo>>(vertices);
-		for(int i =0; i < vertices ; i++){
-			ArrayList<NodeInfo> inner = new ArrayList<NodeInfo>(); 
-			adj.add(inner);
-		}
+		inGraph = new ArrayList<NodeInfo>();
 		
 	}
 	
 	public int numberOfVertices(){
-		return vertices;
+		return inGraph.size();
 	}
 	
 	public int numberOfEdges(){
@@ -34,48 +22,55 @@ public class DAG{
 	}
 	
 	private void validateVertex(int v){
-		if(v < 0 || v >= vertices){
-			throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (vertices-1));
+		if(v < 0 || v >= inGraph.size()){
+			throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (inGraph.size()-1));
 		}
 	}
 	
-	public void addEdge (int v, NodeInfo w){
-		validateVertex(v);
-		adj.get(v).add(w);
+	public void addEdge (NodeInfo v, NodeInfo w){
+		v.adj.add(w);
 		edges++;
 	}
 	
-	public ArrayList<NodeInfo> findAdjacent(int v){
-		validateVertex(v);
-		return adj.get(v);
+	public ArrayList<NodeInfo> findAdjacent(NodeInfo v){
+		validateVertex(v.index);
+		return v.adj;
 	}
 	
 	
-	public String toString() {
-		StringBuilder s = new StringBuilder();
-		s.append(vertices + " vertices, " + edges + " edges " + NEWLINE);
-		for(int v = 0; v < vertices; v++){
-			s.append(String.format("%d:", v));
-			for(NodeInfo w : adj.get(v)){
-				s.append(w.val + ", ");
-			}
-			s.append(NEWLINE);
+	public void output() {
+		for(int i = 0; i < inGraph.size(); i++){
+			System.out.print(inGraph.get(i).val + ": ");
+				for(int j = 0; j < inGraph.get(i).adj.size(); j++){
+					 System.out.print( inGraph.get(i).adj.get(j).val + ",");
+				}
+			System.out.println("");
 		}
-		return s.toString();
 	}
 	
 	  public static void main(String[] args) {
 		  
-		  DAG graph = new DAG(13);
-		  NodeInfo A = new NodeInfo("A");
-		  NodeInfo B  = new NodeInfo("B");
+		  DAG graph = new DAG();
+		  NodeInfo A = new NodeInfo("A",0);
+		  NodeInfo B  = new NodeInfo("B",1);
+		  NodeInfo C  = new NodeInfo("C",2);
+		  NodeInfo D  = new NodeInfo("D",3);
+		  NodeInfo E  = new NodeInfo("E",4);
 		  
-		  graph.addEdge(4, A);
-		  graph.addEdge(2, A);
-		  graph.addEdge(3, A);
-		  graph.addEdge(0, A);
-		  graph.addEdge(2, B);
+		  inGraph.add(A);
+		  inGraph.add(B);
+		  inGraph.add(C);
+		  inGraph.add(D);
+		  inGraph.add(E);
+		    
+		  graph.addEdge(B, A);
+		  graph.addEdge(B, C);
+		  graph.addEdge(A, C);
+		  graph.addEdge(C, D);
+		  graph.addEdge(D, E);
+		  graph.addEdge(E, D);
+		  graph.addEdge(A, E);
 		  
-		  System.out.println(graph.toString());
+		  graph.output();
 	  }
 }
