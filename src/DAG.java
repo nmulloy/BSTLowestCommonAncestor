@@ -74,7 +74,7 @@ public class DAG{
 	}
 	
 	  public static void main(String[] args) {
-	
+		  
 		  DAG graph = new DAG(13);
 		  graph.addEdge(4, 2);
 		  graph.addEdge(2, 3);
@@ -96,7 +96,8 @@ public class DAG{
 		  graph.addEdge(0, 5);
 		  graph.addEdge(6, 4);
 		  graph.addEdge(6, 9);
-		  graph.addEdge(7, 6);
+		  graph.addEdge(7, 12);
+		  graph.addEdge(11, 12);
 		  
 		  System.out.println(graph.toString());
 	  }
