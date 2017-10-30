@@ -45,4 +45,27 @@ public class DAG{
 		validateVertex(v);
 		return adj.get(v);
 	}
+	
+	public int outdegree(int v){
+		validateVertex(v);
+		return adj.get(v).size();
+	}
+	
+	public int indegree(int v){
+		validateVertex(v);
+		return indegree[v];
+	}
+	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(vertices + "vertices, " + edges + "edges " + NEWLINE);
+		for(int v = 0; v < vertices; v++){
+			s.append(String.format("%d ", v));
+			for(int w : adj.get(v)){
+				s.append(String.format("%d ", w));
+			}
+			s.append(NEWLINE);
+		}
+		return s.toString();
+	}
 }
