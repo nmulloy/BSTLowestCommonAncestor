@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class DAG{
 	private static final String NEWLINE = System.getProperty("line.separator");
 	
+
+	
 	private int vertices;//number of vertices
 	private int edges;//number of edges
-	private ArrayList<ArrayList<Integer>> adj;
+	private ArrayList<ArrayList<NodeInfo>> adj;
 	private int [] indegree; //number of vertices pointing to it
 
 	public DAG(int vertices){
@@ -15,9 +17,9 @@ public class DAG{
 		this.vertices = vertices;
 		this.edges = 0;
 		indegree = new int[vertices];
-		adj = new ArrayList<ArrayList<Integer>>(vertices);
+		adj = new ArrayList<ArrayList<NodeInfo>>(vertices);
 		for(int i =0; i < vertices ; i++){
-			ArrayList<Integer> inner = new ArrayList<Integer>(); 
+			ArrayList<NodeInfo> inner = new ArrayList<NodeInfo>(); 
 			adj.add(inner);
 		}
 		
@@ -37,36 +39,25 @@ public class DAG{
 		}
 	}
 	
-	public void addEdge (int v, int w){
+	public void addEdge (int v, NodeInfo w){
 		validateVertex(v);
-		validateVertex(w);
 		adj.get(v).add(w);
-		indegree[w]++;
 		edges++;
 	}
 	
-	public ArrayList<Integer> findAdjacent(int v){
+	public ArrayList<NodeInfo> findAdjacent(int v){
 		validateVertex(v);
 		return adj.get(v);
 	}
 	
-	public int outdegree(int v){
-		validateVertex(v);
-		return adj.get(v).size();
-	}
-	
-	public int indegree(int v){
-		validateVertex(v);
-		return indegree[v];
-	}
 	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(vertices + " vertices, " + edges + " edges " + NEWLINE);
 		for(int v = 0; v < vertices; v++){
 			s.append(String.format("%d:", v));
-			for(int w : adj.get(v)){
-				s.append(String.format(" %d,", w));
+			for(NodeInfo w : adj.get(v)){
+				s.append(w.val + ", ");
 			}
 			s.append(NEWLINE);
 		}
@@ -76,28 +67,14 @@ public class DAG{
 	  public static void main(String[] args) {
 		  
 		  DAG graph = new DAG(13);
-		  graph.addEdge(4, 2);
-		  graph.addEdge(2, 3);
-		  graph.addEdge(3, 2);
-		  graph.addEdge(6, 0);
-		  graph.addEdge(0, 1);
-		  graph.addEdge(2, 0);
-		  graph.addEdge(11, 12);
-		  graph.addEdge(12, 9);
-		  graph.addEdge(9, 10);
-		  graph.addEdge(9, 11);
-		  graph.addEdge(10, 12);
-		  graph.addEdge(11, 4);
-		  graph.addEdge(4, 3);
-		  graph.addEdge(3, 5);
-		  graph.addEdge(6, 8);
-		  graph.addEdge(8, 6);
-		  graph.addEdge(5, 4);
-		  graph.addEdge(0, 5);
-		  graph.addEdge(6, 4);
-		  graph.addEdge(6, 9);
-		  graph.addEdge(7, 12);
-		  graph.addEdge(11, 12);
+		  NodeInfo A = new NodeInfo("A");
+		  NodeInfo B  = new NodeInfo("B");
+		  
+		  graph.addEdge(4, A);
+		  graph.addEdge(2, A);
+		  graph.addEdge(3, A);
+		  graph.addEdge(0, A);
+		  graph.addEdge(2, B);
 		  
 		  System.out.println(graph.toString());
 	  }
