@@ -6,43 +6,43 @@ public class DAG {
 	private int edges;// number of edges
 	ArrayList<DagNode> inGraph;
 
-	public DAG() {
-		this.edges = 0;
-		inGraph = new ArrayList<DagNode>();
+	public DAG() {//constructor for DAG
+		this.edges = 0;	//initializes the number of edges to zero
+		inGraph = new ArrayList<DagNode>();	//creates the inGraph ArrayLsit
 	}
 
 	public int numberOfVertices() {
-		return inGraph.size();
+		return inGraph.size();// the number of vertices is the number of objects in the ArrayList
 	}
 
 	public int numberOfEdges() {
-		return edges;
+		return edges;//returns the number of edges in the DAG
 	}
 
-	private boolean validateVertex(DagNode v) {// the DagNode must be in the
+	private boolean validateVertex(DagNode v) {// the DagNode must be in the the inGraph list in order to be a valid vertex
 		return inGraph.contains(v);
 	}
 
 	public void addEdge(DagNode v, DagNode w) {// in the format v points w
 		if(validateVertex(v) == true && validateVertex(w) == true){
-			w.adj.add(v);
+			w.parents.add(v);
 			edges++;
 		}
 	}
 
-	public ArrayList<DagNode> findAdjacent(DagNode v) {
+	public ArrayList<DagNode> findParents(DagNode v) {//returns all adjacent nodes to the vertex
 		if (validateVertex(v) == true) {
-			return v.adj;
+			return v.parents;
 		} else {
 			return null;
 		}
 	}
 
-	public void output() {
+	public void output() {// prints out all the parents of the DagNodes
 		for (int i = 0; i < inGraph.size(); i++) {
 			System.out.print(inGraph.get(i).val + ": ");
-			for (int j = 0; j < inGraph.get(i).adj.size(); j++) {
-				System.out.print(inGraph.get(i).adj.get(j).val + ",");
+			for (int j = 0; j < inGraph.get(i).parents.size(); j++) {
+				System.out.print(inGraph.get(i).parents.get(j).val + ",");
 			}
 			System.out.println("");
 		}
