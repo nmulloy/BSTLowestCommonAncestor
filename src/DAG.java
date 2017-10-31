@@ -24,7 +24,7 @@ public class DAG {
 		return edges;// returns the number of edges in the DAG
 	}
 
-	private boolean validateVertex(DagNode v) {// the DagNode must be in the the
+	boolean validateVertex(DagNode v) {// the DagNode must be in the the
 												// inGraph list in order to be a
 												// valid vertex
 		return inGraph.contains(v);
@@ -37,14 +37,6 @@ public class DAG {
 		}
 	}
 
-	public ArrayList<DagNode> findParents(DagNode v) {// returns all parent
-														// nodes to the vertex
-		if (validateVertex(v) == true) {
-			return v.parents;
-		} else {
-			return null;
-		}
-	}
 
 	public void output() {// prints out all the parents of the DagNodes
 		if (!isEmpty()) {

@@ -19,17 +19,31 @@ public class DAGTest {
 	}
 	
 	@Test
-	public void testValidateVertex
+	public void testValidateVertex() {
+		DAG graph = new DAG();
+		DAG newGraph = new DAG();
+		
+		DagNode A = new DagNode("A", graph);
+		DagNode X = new DagNode("X", newGraph);
+		
+		assertFalse("Checks for an invalid vertex", graph.validateVertex(X));
+		assertTrue("Checks for an valid vertex", graph.validateVertex(A));
+	}
 
-	/*@Test
+	@Test
 	public void testNumberOfEdges(){
 		DAG graph = new DAG();
 		
 		assertEquals("number of edges should be zero", 0, graph.numberOfEdges());
 		
 		DagNode A = new DagNode("A", graph);
+		DagNode B = new DagNode("B", graph);
+		DagNode C = new DagNode("C", graph);
 		
-		graph.addEdges(B,A);
+		graph.addEdge(B,A);
+		graph.addEdge(B,C);
+		
+		assertEquals("number of edges should be 2", 2, graph.numberOfEdges());
 	}
 	/*
 	public int numberOfEdges() {
