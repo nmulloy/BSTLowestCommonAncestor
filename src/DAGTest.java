@@ -1,25 +1,37 @@
-import java.util.ArrayList;
+import static org.junit.Assert.*;
 
-public class DAG {
-	private static final String NEWLINE = System.getProperty("line.separator");
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-	private int edges;// number of edges
-	ArrayList<DagNode> inGraph;// list of all the nodes in the graph
+public class DAGTest {
 
-	public DAG() {// constructor for DAG
-		this.edges = 0; // initializes the number of edges to zero
-		inGraph = new ArrayList<DagNode>(); // creates the inGraph ArrayLsit
+	@Test
+	public void testNumberOfVertices() {
+		DAG graph = new DAG();
+		assertTrue("Checks that nothing is in the graph", graph.isEmpty());
+		
+		DagNode A = new DagNode("A", graph);
+		DagNode B = new DagNode("B", graph);
+		
+		assertFalse("Checks that nothing is in the graph", graph.isEmpty());
+		assertEquals("Putting in the same value again", 2, graph.numberOfVertices());
 	}
+	
+	@Test
+	public void testValidateVertex
 
-	public boolean isEmpty() {
-		return numberOfVertices() == 0;
+	/*@Test
+	public void testNumberOfEdges(){
+		DAG graph = new DAG();
+		
+		assertEquals("number of edges should be zero", 0, graph.numberOfEdges());
+		
+		DagNode A = new DagNode("A", graph);
+		
+		graph.addEdges(B,A);
 	}
-
-	public int numberOfVertices() {
-		return inGraph.size();// the number of vertices is the number of objects
-								// in the ArrayList
-	}
-
+	/*
 	public int numberOfEdges() {
 		return edges;// returns the number of edges in the DAG
 	}
@@ -57,4 +69,7 @@ public class DAG {
 			}
 		}
 	}
+}*/
+
+
 }
