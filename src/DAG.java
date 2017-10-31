@@ -5,7 +5,7 @@ public class DAG{
 	
 	
 	private int edges;//number of edges
-	private static ArrayList<NodeInfo> inGraph;
+	ArrayList<NodeInfo> inGraph;
 	
 	public DAG(){
 		this.edges = 0;
@@ -21,20 +21,21 @@ public class DAG{
 		return edges;
 	}
 	
-	private void validateVertex(int v){
-		if(v < 0 || v >= inGraph.size()){
-			throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (inGraph.size()-1));
-		}
+	private boolean validateVertex(NodeInfo v){
+		return inGraph.contains(v);
 	}
 	
 	public void addEdge (NodeInfo v, NodeInfo w){
-		v.adj.add(w);
+		w.adj.add(v);
 		edges++;
 	}
 	
 	public ArrayList<NodeInfo> findAdjacent(NodeInfo v){
-		validateVertex(v.index);
-		return v.adj;
+		if( validateVertex(v) == true){
+		return v.adj;}
+		else{
+			return null;
+		}
 	}
 	
 	
@@ -51,17 +52,17 @@ public class DAG{
 	  public static void main(String[] args) {
 		  
 		  DAG graph = new DAG();
-		  NodeInfo A = new NodeInfo("A",0);
-		  NodeInfo B  = new NodeInfo("B",1);
-		  NodeInfo C  = new NodeInfo("C",2);
-		  NodeInfo D  = new NodeInfo("D",3);
-		  NodeInfo E  = new NodeInfo("E",4);
+		  NodeInfo A = new NodeInfo("A");
+		  NodeInfo B  = new NodeInfo("B");
+		  NodeInfo C  = new NodeInfo("C");
+		  NodeInfo D  = new NodeInfo("D");
+		  NodeInfo E  = new NodeInfo("E");
 		  
-		  inGraph.add(A);
-		  inGraph.add(B);
-		  inGraph.add(C);
-		  inGraph.add(D);
-		  inGraph.add(E);
+		  graph.inGraph.add(A);
+		  graph.inGraph.add(B);
+		  graph.inGraph.add(C);
+		  graph.inGraph.add(D);
+		  graph.inGraph.add(E);
 		    
 		  graph.addEdge(B, A);
 		  graph.addEdge(B, C);
