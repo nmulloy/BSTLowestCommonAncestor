@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
-public class NodeInfo {
+public class DagNode{
 		Object val;
 		String colour = "white";
-		ArrayList<NodeInfo> adj;
+		ArrayList<DagNode> adj;
 		int count;
 		
-		public NodeInfo(Object val){
+		public DagNode (Object val){
 			this.val = val;
-			this.adj = new ArrayList<NodeInfo>();
+			this.adj = new ArrayList<DagNode>();
 			this.count = 0;
 		}
 	

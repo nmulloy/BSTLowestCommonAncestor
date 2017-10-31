@@ -3,12 +3,12 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class BFS {
-	private static void setColourBlue(DAG graph, NodeInfo s) {
-		LinkedList<NodeInfo> q = new LinkedList<NodeInfo>();
+	private static void setColourBlue(DAG graph, DagNode s) {
+		LinkedList<DagNode> q = new LinkedList<DagNode>();
 		q.addLast(s);
 
 		while (!q.isEmpty()) {
-			NodeInfo v = q.removeFirst();
+			DagNode v = q.removeFirst();
 			for (int i = 0; i < v.adj.size(); i++) {
 				v.adj.get(i).colour = "blue";
 				q.addLast(v.adj.get(i));
@@ -17,12 +17,12 @@ public class BFS {
 		}
 	}
 
-	private static void setColourRed(DAG graph, NodeInfo s) {
-		LinkedList<NodeInfo> q = new LinkedList<NodeInfo>();
+	private static void setColourRed(DAG graph, DagNode s) {
+		LinkedList<DagNode> q = new LinkedList<DagNode>();
 		q.addLast(s);
 
 		while (!q.isEmpty()) {
-			NodeInfo v = q.removeFirst();
+			DagNode v = q.removeFirst();
 			for (int i = 0; i < v.adj.size(); i++) {
 				if (v.adj.get(i).colour == "blue") {
 					v.adj.get(i).colour = "red";
@@ -36,13 +36,15 @@ public class BFS {
 
 	}
 	
-	private static void LCAInDag(NodeInfo v, NodeInfo w, DAG graph){
+	private static void LCAInDAG(DAG graph, DagNode v, DagNode w){
 		setColourBlue(graph,v);
 		setColourRed(graph,w);
 		
 		System.out.print("The lowest common ancestor(s): ");
 		for(int i = 0; i < graph.inGraph.size(); i++){
-			
+			if(graph.inGraph.get(i).colour == "red" && graph.inGraph.get(i).count == 0){
+				System.out.print(graph.inGraph.get(i).val + ", ");
+			}
 		}
 	}
 	
@@ -51,15 +53,15 @@ public class BFS {
 	public static void main(String[] args) {
 		DAG graph = new DAG();
 		
-		NodeInfo A = new NodeInfo("A");
-		NodeInfo B  = new NodeInfo("B");
-		NodeInfo C  = new NodeInfo("C");
-		NodeInfo D  = new NodeInfo("D");
-		NodeInfo E  = new NodeInfo("E");
-		NodeInfo F  = new NodeInfo("F");
-		NodeInfo G  = new NodeInfo("G");
-		NodeInfo H  = new NodeInfo("H");
-		NodeInfo I  = new NodeInfo("I");
+		DagNode A = new DagNode("A");
+		DagNode B  = new DagNode("B");
+		DagNode C  = new DagNode("C");
+		DagNode D  = new DagNode("D");
+		DagNode E  = new DagNode("E");
+		DagNode F  = new DagNode("F");
+		DagNode G  = new DagNode("G");
+		DagNode H  = new DagNode("H");
+		DagNode I  = new DagNode("I");
 		
 		graph.inGraph.add(A);
 		graph.inGraph.add(B);
@@ -71,23 +73,23 @@ public class BFS {
 		graph.inGraph.add(H);
 		graph.inGraph.add(I);
 		
-		graph.addEdge(E, C);
 		graph.addEdge(C, A);
-		graph.addEdge(E, D);
+		graph.addEdge(E, C);
 		graph.addEdge(D, B);
-		graph.addEdge(F, E);
-		graph.addEdge(G, E);
-		graph.addEdge(H, G);
-		graph.addEdge(I, C);
-		graph.addEdge(I, D);
+		graph.addEdge(E, D);
+		graph.addEdge(F, C);
+		graph.addEdge(F, D);
+		graph.addEdge(G, F);
+		graph.addEdge(H, F);
+		graph.addEdge(I, H);
 		
-		graph.output();
+		//graph.output();
 		
-		
-		
-		for(int i = 0; i < graph.inGraph.size(); i++){
+		/*for(int i = 0; i < graph.inGraph.size(); i++){
 			System.out.println(graph.inGraph.get(i).val + ": " + graph.inGraph.get(i).colour + " count:" + graph.inGraph.get(i).count);
-		}
+		}*/
+		
+		LCAInDAG(graph,A,B);
 		
 	}
 	
