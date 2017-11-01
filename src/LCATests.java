@@ -15,7 +15,7 @@ import org.junit.runners.JUnit4;
  */
 
 @RunWith(JUnit4.class)
-public class BSTTest
+public class LCATests
 {
   @Test
   public void testPut(){
@@ -357,4 +357,105 @@ public class BSTTest
  		assertEquals("Checking the lca of a negative node and a positive node", "7", BST.lca(10, -9));
  		
  	}
+     
+     @Test
+ 	public void testNumberOfVertices() {
+ 		DAG graph = new DAG();
+ 		assertTrue("Checks that nothing is in the graph", graph.isEmpty());
+
+ 		DagNode A = new DagNode("A", graph);
+ 		DagNode B = new DagNode("B", graph);
+
+ 		assertFalse("Checks that nothing is in the graph", graph.isEmpty());
+ 		assertEquals("Putting in the same value again", 2, graph.numberOfVertices());
+ 	}
+
+ 	@Test
+ 	public void testValidateVertex() {
+ 		DAG graph = new DAG();
+ 		DAG newGraph = new DAG();
+
+ 		DagNode A = new DagNode("A", graph);
+ 		DagNode X = new DagNode("X", newGraph);
+
+ 		assertFalse("Checks for an invalid vertex", graph.validateVertex(X));
+ 		assertTrue("Checks for an valid vertex", graph.validateVertex(A));
+ 	}
+
+ 	@Test
+ 	public void testNumberOfEdges() {
+ 		DAG graph = new DAG();
+ 		DAG newGraph = new DAG();
+
+ 		DagNode A = new DagNode("A", graph);
+ 		DagNode B = new DagNode("B", graph);
+ 		DagNode C = new DagNode("C", graph);
+
+ 		DagNode X = new DagNode("X", newGraph);
+
+ 		graph.addEdge(A, X);
+
+ 		assertEquals("number of edges should be zero", 0, graph.numberOfEdges());
+
+ 		graph.addEdge(B, A);
+ 		graph.addEdge(B, C);
+
+ 		assertEquals("number of edges should be 2", 2, graph.numberOfEdges());
+ 	}
+ 	 @Test
+ 	 public void testOutput(){
+
+ 		 DAG graph = new DAG();
+ 	       
+ 		 assertNull("Checking output of non-empty graph", graph.output());
+ 		 
+ 		 String result = "A:C,\nB:D,\nC:E,\nD:E,\nE:\n";
+ 		 
+ 	      DagNode A = new DagNode("A",graph);
+ 	      DagNode B = new DagNode("B",graph);
+ 	      DagNode C = new DagNode("C",graph);
+ 	      DagNode D = new DagNode("D",graph);
+ 	      DagNode E = new DagNode("E",graph);
+ 	       
+ 	      graph.addEdge(C, A); 
+ 	      graph.addEdge(E, C);
+ 	      graph.addEdge(D, B);
+ 	      graph.addEdge(E, D);
+ 	      
+ 	      assertEquals("Checking output of non-empty graph", result, graph.output());
+ 	 }
+ 	 
+ 	 @Test
+ 	 public void testLCAInNode(){
+ 		DAG graph = new DAG();
+ 		DAG newGraph = new DAG(); 
+ 		
+ 		 DagNode X = new DagNode("X",newGraph);
+	     DagNode Y = new DagNode("Y",newGraph);
+	     
+		 assertNull("Checking output of empty graph", graph.LCAInDAG(X,Y));
+		 
+		 DagNode A = new DagNode("A",graph);
+	     DagNode B = new DagNode("B",graph);
+	     DagNode C = new DagNode("C",graph);
+	     DagNode D = new DagNode("D",graph);
+	     DagNode E = new DagNode("E",graph);
+	     DagNode F = new DagNode("F",graph);
+	     
+		 assertNull("Checking output of non-empty graph with invalid DagNodes", graph.LCAInDAG(X, Y));
+		 
+		 String result = "The lowest common ancestor(s):";
+		 
+		 assertEquals("Checking the output for a non empty graph with valid DagNodes but  no edges or LCA",result,graph.LCAInDAG(A, B));
+
+	     graph.addEdge(C, A); 
+	     graph.addEdge(E, C);
+	     graph.addEdge(D, B);
+	     graph.addEdge(E, D);
+	     graph.addEdge(F,E);
+	     
+	     result +="E,";
+	     
+	     assertEquals("Checking the output for a non empty graph with valid DagNodes and an LCA of E",result,graph.LCAInDAG(A, B));
+ 	 }
 }
