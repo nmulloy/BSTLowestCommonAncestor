@@ -95,7 +95,7 @@ public class DAG {
 	}
 
 	public String LCAInDAG(DagNode v, DagNode w) {
-			if (isEmpty() == false && validateVertex(v) == true && validateVertex(w) == true) {
+			if (isEmpty() == false && isDag() == true && validateVertex(v) == true && validateVertex(w) == true) {
 				String result = "";
 				setColourBlue(v);// sets all the parents of v blue
 				setColourRed(w);// sets all the parents w that are blue

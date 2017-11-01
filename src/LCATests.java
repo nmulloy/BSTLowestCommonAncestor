@@ -458,4 +458,33 @@ public class LCATests
 	     
 	     assertEquals("Checking the output for a non empty graph with valid DagNodes and an LCA of E",result,graph.LCAInDAG(A, B));
  	 }
+ 	 
+ 	 @Test
+ 	 public void testIsDag(){
+ 		DAG emptyDAG = new DAG();
+ 		
+ 		assertFalse("Checking an empty DAG", emptyDAG.isDag());
+ 		
+ 		DAG nonDAG = new DAG();
+ 		
+ 		DagNode A = new DagNode("A",nonDAG);
+	    DagNode B = new DagNode("B",nonDAG);
+	    DagNode C = new DagNode("C",nonDAG);
+	    
+	    nonDAG.addEdge(A, C);
+	    nonDAG.addEdge(C, B);
+	    nonDAG.addEdge(B, A);
+	    
+	    assertFalse("Checking a directed cyclical graph", nonDAG.isDag());
+	    
+	    DAG dag = new DAG();
+	    DagNode A1 = new DagNode("A",dag);
+	    DagNode B2 = new DagNode("B",dag);
+	    DagNode C3 = new DagNode("C",dag);
+	    
+	    dag.addEdge(A, C);
+	    dag.addEdge(B, C);
+	    
+	    assertTrue("Checking a directed acyclic graph", dag.isDag());
+ 	 }
 }
