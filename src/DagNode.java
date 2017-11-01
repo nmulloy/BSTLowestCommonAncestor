@@ -4,6 +4,7 @@ public class DagNode {
 		String colour = "white";// colour of node *used to find LCA
 		ArrayList<DagNode> parents;// ArrayList of all the node's parents
 		int countOfRedChildNodes = 0;// count of how many of its child nodes are red
+		boolean visitedInDfs = false;
 
 		public DagNode(Object val, DAG graph) {
 			this.val = val;

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.LinkedList;
+
 
 public class DAG {
 	private static final String NEWLINE = System.getProperty("line.separator");
@@ -94,7 +94,7 @@ public class DAG {
 
 	}
 
-	String LCAInDAG(DagNode v, DagNode w) {
+	public String LCAInDAG(DagNode v, DagNode w) {
 			if (isEmpty() == false && validateVertex(v) == true && validateVertex(w) == true) {
 				String result = "";
 				setColourBlue(v);// sets all the parents of v blue
@@ -116,4 +116,26 @@ public class DAG {
 				return null;
 			}
 		} 
+	
+	public void DFS(DagNode v){
+		for(int i = 0; i < v.parents.size(); i++){
+			if(!v.parents.get(i).visitedInDfs){
+			v.parents.get(i).visitedInDfs = true;
+			DFS(v.parents.get(i));
+			}
+		}
+	}
+	
+	public boolean isDag(){
+		if(!isEmpty()){
+			DFS(inGraph.get(0));
+			for(int i = 0; i < inGraph.size(); i++){
+				if(inGraph.get(i).visitedInDfs == false){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+		
 }
