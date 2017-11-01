@@ -30,7 +30,7 @@ public class DAG {
 		return inGraph.contains(v);
 	}
 
-	public void addEdge(DagNode v, DagNode w) {// in the format v points w
+	public void addEdge(DagNode v, DagNode w)throws IllegalArgumentException {// in the format v points w
 		if (validateVertex(v) == true && validateVertex(w) == true) {
 			w.parents.add(v);
 			edges++;
@@ -38,15 +38,37 @@ public class DAG {
 	}
 
 
-	public void output() {// prints out all the parents of the DagNodes
+	public String output() {// prints out all the parents of the DagNodes
 		if (!isEmpty()) {
+			String result = "";
 			for (int i = 0; i < inGraph.size(); i++) {
-				System.out.print(inGraph.get(i).val + ": ");
+				result += inGraph.get(i).val + ":";
 				for (int j = 0; j < inGraph.get(i).parents.size(); j++) {
-					System.out.print(inGraph.get(i).parents.get(j).val + ",");
+					result += inGraph.get(i).parents.get(j).val + ",";
 				}
-				System.out.println("");
+				result += "\n";
 			}
+			return result;
 		}
+		return null;
 	}
+	
+	public static void main(String[] args) {
+       DAG graph = new DAG();
+       
+       DagNode A = new DagNode("A",graph);
+       DagNode B = new DagNode("B",graph);
+       DagNode C = new DagNode("C",graph);
+       DagNode D = new DagNode("D",graph);
+       DagNode E = new DagNode("E",graph);
+       
+      graph.addEdge(C,A); 
+      graph.addEdge(E, C);
+      graph.addEdge(D, B);
+      graph.addEdge(E, D);
+      
+      System.out.print(graph.output());
+    }
+	
+	
 }
